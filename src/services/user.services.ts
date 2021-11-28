@@ -1,9 +1,10 @@
-import { UserModel } from "../models/user.model";
+import { UserModel, UserWithToken } from "../models/user.model";
 import { UserDAO } from "../dao/user.dao";
 import { UnknownUserError } from "../errors/unknown-user.error";
 import * as mongoDB from "mongodb";
 import { ObjectID } from 'bson';
 
+const jwt = require('jsonwebtoken');
 
 export class UserService {
     private userDAO: UserDAO = new UserDAO()
@@ -56,6 +57,29 @@ export class UserService {
             }
             return this.userDAO.deleteUser(new ObjectID(userID));
         });
+    }
+
+    public async login(email: string, password: string): Promise<UserWithToken> {
+        if (!email || !password) {
+            throw new Error('all inputs are required');
+        }
+        const user = await this.userDAO.getByEmail(email);
+        if (user && user.password === password) {
+            const token = jwt.sign(
+                user,
+                process.env.TOKEN_KEY,
+                {
+                    expiresIn: "24h"
+                }
+            );
+            const userLoged: UserWithToken = {
+                ...user,
+                token
+            }
+            return userLoged;
+        } else {
+            throw new UnknownUserError()
+        }
     }
 
     private checkUserToCreateIsValid(user: UserModel) {

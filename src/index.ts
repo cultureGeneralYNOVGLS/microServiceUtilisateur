@@ -1,4 +1,5 @@
 import express from 'express';
+import loginRouter from './routes/login.router';
 import userRouter from './routes/user.router';
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(cors())
 
 // API Routes
 app.use('/api/user', userRouter)
+app.use('/api/login', loginRouter)
 
 // start the Express server
 app.listen(port, () => {
