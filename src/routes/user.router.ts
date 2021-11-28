@@ -5,7 +5,7 @@ import { UserService } from '../services/user.services';
 
 const userRouter = Router();
 const userService = new UserService();
-// const auth = require("../services/auth.service");
+const auth = require("../services/auth.service");
 
 /**
  * @openapi
@@ -76,7 +76,7 @@ userRouter.get('/', (request, response) => {
  *     summary: Update a user
  *     description: Update a user
  */
- userRouter.patch('/:userID',/* auth,*/ (request, response) => {
+ userRouter.patch('/:userID', auth, (request, response) => {
     try {
         userService.updateUser(request.params.userID, request.body).then((user : UserModel) => {
             response.status(200).send(user);
@@ -93,7 +93,7 @@ userRouter.get('/', (request, response) => {
  *     summary: Delete a user
  *     description: Delete a user
  */
- userRouter.delete('/:userID', (request, response) => {
+ userRouter.delete('/:userID', auth, (request, response) => {
     try {
         const deleteUser = userService.deleteUser(request.params.userID);
         response.status(200).send(deleteUser);
