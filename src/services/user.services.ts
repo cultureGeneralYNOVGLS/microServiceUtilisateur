@@ -3,8 +3,10 @@ import { UserDAO } from "../dao/user.dao";
 import { UnknownUserError } from "../errors/unknown-user.error";
 import * as mongoDB from "mongodb";
 import { ObjectID } from 'bson';
+import { TokenModel } from "../models/token.model";
 
 const jwt = require('jsonwebtoken');
+const config = process.env;
 
 export class UserService {
     private userDAO: UserDAO = new UserDAO()
@@ -79,6 +81,19 @@ export class UserService {
             return userLoged;
         } else {
             throw new UnknownUserError()
+        }
+    }
+
+    public verifyToken(token: TokenModel) {
+        const tokenUser = token.token;
+        if (!tokenUser) {
+            throw new Error("A token is required for authentication");
+        }
+        try {
+            const decoded = jwt.verify(tokenUser, config.TOKEN_KEY);
+            return decoded;
+        } catch (err) {
+            throw new Error("Invalid Token");
         }
     }
 

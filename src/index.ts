@@ -1,6 +1,7 @@
 import express from 'express';
-import loginRouter from './routes/login.router';
 import userRouter from './routes/user.router';
+import loginRouter from './routes/login.router';
+import authRouter from './routes/auth.router';
 
 const app = express();
 const port = 7510; // default port to listen
@@ -18,6 +19,7 @@ app.use(cors())
 // API Routes
 app.use('/api/user', userRouter)
 app.use('/api/login', loginRouter)
+app.use('/api/auth', authRouter)
 
 // start the Express server
 app.listen(port, () => {
