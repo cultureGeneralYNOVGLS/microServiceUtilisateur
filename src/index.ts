@@ -4,7 +4,7 @@ import loginRouter from './routes/login.router';
 import authRouter from './routes/auth.router';
 
 const app = express();
-const port = 7510; // default port to listen
+const port = 7512; // default port to listen
 const dotenv = require('dotenv')
 const cors = require('cors')
 

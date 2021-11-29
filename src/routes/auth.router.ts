@@ -13,6 +13,7 @@ const userService = new UserService();
  */
  authRouter.post('/', (request, response) => {
     try {
+        console.log("verif Token User")
         const verifyToken = userService.verifyToken(request.body);
         response.status(200).send(verifyToken);
     } catch (error) {
