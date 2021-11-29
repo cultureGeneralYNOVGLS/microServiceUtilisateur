@@ -18,8 +18,8 @@ app.use(cors())
 
 // API Routes
 app.use('/api/user', userRouter)
-app.use('/api/login', loginRouter)
-app.use('/api/auth', authRouter)
+app.use('/api/user/login', loginRouter)
+app.use('/api/user/auth', authRouter)
 
 // start the Express server
 app.listen(port, () => {
