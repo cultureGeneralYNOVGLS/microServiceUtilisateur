@@ -71,7 +71,7 @@ export class UserService {
                 user,
                 process.env.TOKEN_KEY,
                 {
-                    expiresIn: "1h"
+                    expiresIn: "24h"
                 }
             );
             const userLoged: UserWithToken = {
