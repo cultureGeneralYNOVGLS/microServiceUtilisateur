@@ -3,16 +3,17 @@ import { UnknownUserError } from '../errors/unknown-user.error';
 import { UserModel } from '../models/user.model';
 import { UserService } from '../services/user.services';
 
+const auth = require("../services/auth.service");
+
 const userRouter = Router();
 const userService = new UserService();
-const auth = require("../services/auth.service");
 
 /**
  * @openapi
  * /api/user/getkey:
  *   get:
- *     summary: Retrieve a satus code 200 when app is run
- *     description: Retrieve a satus code 200 when app is run
+ *     summary: Retrieve a satus code 200 when microServiceUtilisateur app is run
+ *     description: Retrieve a satus code 200 when microServiceUtilisateur app is run
  */
  userRouter.get('/getkey', async (request, response) => {
     response.sendStatus(200);
@@ -39,8 +40,8 @@ userRouter.get('/', (request, response) => {
  * @openapi
  * /api/user/:userID:
  *   get:
- *     summary: Retrieve a user of user collection
- *     description: Retrieve a user of user collection
+ *     summary: Retrieve a user of user
+ *     description: Retrieve a user of user
  */
  userRouter.get('/:userID', (request, response) => {
     try {
@@ -72,7 +73,7 @@ userRouter.get('/', (request, response) => {
 /**
  * @openapi
  * /api/user/:userID:
- *   put:
+ *   patch:
  *     summary: Update a user
  *     description: Update a user
  */

@@ -1,9 +1,12 @@
 import { UserModel, UserWithToken } from "../models/user.model";
-import { UserDAO } from "../dao/user.dao";
+import { TokenModel } from "../models/token.model";
+
 import { UnknownUserError } from "../errors/unknown-user.error";
+
+import { UserDAO } from "../dao/user.dao";
+
 import * as mongoDB from "mongodb";
 import { ObjectID } from 'bson';
-import { TokenModel } from "../models/token.model";
 
 const jwt = require('jsonwebtoken');
 const config = process.env;
