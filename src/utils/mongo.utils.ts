@@ -3,8 +3,8 @@ import * as mongoDB from "mongodb";
 
 let mongodbClient: any;
 let db: mongoDB.Db;
-const URI_MONGO: string = "mongodb://micro-service-user-mongodb:27017"
-const DB_MONGO: string = "cultureGeneralYNOVGLS_microServiceUtilisateur"
+const URI_MONGO: string = "mongodb://root:not24get@micro-service-user-mongodb:27017/admin";
+const DB_MONGO: string = "micro-service"
 
 export class MongoUtils {
 
